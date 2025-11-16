@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=0.5">
+    <title>E-commerce Prototype - HTML/CSS/JS</title>
+    <script>
+        // Set initial-scale to 1.0 for desktop/PC
+        if (window.innerWidth >= 768) {
+            document.querySelector('meta[name="viewport"]').setAttribute('content', 'width=device-width, initial-scale=1.0');
+        }
+    </script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div id="app" class="min-h-screen">
+        <!-- Mobile Header -->
+        <header class="md:hidden sticky top-0 bg-white/95 backdrop-blur-lg shadow-xl border-b border-gray-200 z-20">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="flex items-center justify-between h-16">
+                    <div class="flex items-center space-x-4">
+                        <button id="mobileMenuToggle" class="p-2 rounded-lg hover:bg-gray-100 transition">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-menu"><line x1="4" x2="20" y1="12" y2="12"/><line x1="4" x2="20" y1="6" y2="6"/><line x1="4" x2="20" y1="18" y2="18"/></svg>
+                        </button>
+                        <h1 class="text-xl font-bold text-gray-900">DayaStore</h1>
+                    </div>
+                    <div class="flex items-center space-x-2">
+                        <button id="mobileDarkModeToggle" class="p-2 rounded-lg hover:bg-gray-100 transition">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-moon"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"/></svg>
+                        </button>
+                        <button id="mobileWishlistBtn" class="p-2 rounded-lg hover:bg-gray-100 transition relative">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-heart"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+                        </button>
+                        <button id="mobileOpenCartBtn" class="p-2 rounded-lg hover:bg-gray-100 transition relative">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="8" cy="21" r="1"/><circle cx="19" cy="21" r="1"/><path d="M2.05 2.05h2l2.66 12.42a2 2 0 0 0 2 1.58h9.72a2 2 0 0 0 2-1.58L23 6H6"/></svg>
+                            <span id="mobileCartCount" class="absolute -top-1 -right-1 bg-red-500 text-white text-xs rounded-full h-5 w-5 flex items-center justify-center">0</span>
+                        </button>
+                    </div>
+                </div>
+                <!-- Mobile Menu -->
+                <div id="mobileMenu" class="hidden bg-white border-t border-gray-200 py-4">
+                    <div class="space-y-4">
+                        <div>
+                            <input type="text" id="mobileSearchInput" placeholder="Search products..." class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500">
+                        </div>
+                        <div>
+                            <select id="mobileCategoryFilter" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500">
+                                <option value="">All Categories</option>
+                                <option value="Electronics">Electronics</option>
+                                <option value="Wearables">Wearables</option>
+                                <option value="Audio">Audio</option>
+                                <option value="Gaming">Gaming</option>
+                                <option value="Accessories">Accessories</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <!-- Desktop Header -->
+        <header class="hidden md:block sticky top-0 bg-white/95 backdrop-blur-lg shadow-xl border-b border-gray-200 z-20">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="flex items-center justify-between h-16">
+                    <div class="flex items-center space-x-4">
+                        <h1 class="text-2xl font-bold text-gray-900">DayaStore</h1>
+                    </div>
+                    <div class="flex items-center space-x-4">
+                        <div class="relative">
+                            <input type="text" id="searchInput" placeholder="Search products..." class="w-80 px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500">
+                        </div>
+                        <select id="categoryFilter" class="px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500">
+                            <option value="">All Categories</option>
+                            <option value="Electronics">Electronics</option>
+                            <option value="Wearables">Wearables</option>
+                            <option value="Audio">Audio</option>
+                            <option value="Gaming">Gaming</option>
+                            <option value="Accessories">Accessories</option>
+                        </select>
+                        <button id="darkModeToggle" class="p-2 rounded-lg hover:bg-gray-100 transition">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-moon"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"/></svg>
+                        </button>
+                        <button id="wishlistBtn" class="p-2 rounded-lg hover:bg-gray-100 transition relative">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-heart"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+                        </button>
+                        <button id="openCartBtn" class="p-2 rounded-lg hover:bg-gray-100 transition relative">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="8" cy="21" r="1"/><circle cx="19" cy="21" r="1"/><path d="M2.05 2.05h2l2.66 12.42a2 2 0 0 0 2 1.58h9.72a2 2 0 0 0 2-1.58L23 6H6"/></svg>
+                            <span id="cartCount" class="absolute -top-1 -right-1 bg-red-500 text-white text-xs rounded-full h-5 w-5 flex items-center justify-center">0</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <main class="max-w-7xl mx-auto p-4 sm:p-6 lg:p-8 pt-10">
+            <h1 class="text-4xl font-extrabold text-gray-900 mb-8 border-b-2 border-indigo-400 pb-2">Featured Products</h1>
+            <div id="productGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
+                <!-- Products will be rendered here -->
+            </div>
+        </main>
+        
+        <div id="cartModal" class="cart-modal fixed top-0 right-0 w-full md:w-96 h-full bg-white shadow-2xl z-50 flex flex-col">
+            <div class="p-5 border-b flex justify-between items-center shadow-sm">
+                <h2 class="text-2xl font-bold text-indigo-600">Your Cart</h2>
+                <button id="closeCartBtn" class="text-gray-500 hover:text-gray-900 p-2 rounded-full hover:bg-gray-100 transition">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-x"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
+                </button>
+            </div>
+            <div id="cartItems" class="flex-grow overflow-y-auto p-5 space-y-4">
+                <p id="emptyCartMessage" class="text-center text-gray-500 mt-10">Your cart is empty.</p>
+            </div>
+            <div class="p-5 border-t shadow-inner">
+                <div class="flex justify-between items-center text-xl font-bold mb-4">
+                    <span>Total:</span>
+                    <span id="cartTotal">$0.00</span>
+                </div>
+                <button id="checkoutBtn" class="w-full py-3 bg-indigo-600 text-white font-semibold rounded-lg hover:bg-indigo-700 transition duration-200 shadow-md">
+                    Proceed to Checkout
+                </button>
+            </div>
+        </div>
+
+        <div id="cartOverlay" class="fixed inset-0 bg-gray-900 bg-opacity-50 z-40 hidden" onclick="toggleCart(false)"></div>
+
+        <div id="checkoutConfirmationModal" class="fixed inset-0 z-[60] flex items-center justify-center hidden bg-gray-900 bg-opacity-70">
+            <div class="bg-white p-8 rounded-xl shadow-2xl w-full max-w-sm text-center transform transition-all duration-300 scale-95">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-12 w-12 text-green-500 mx-auto mb-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><path d="m9 11 3 3L22 4"/></svg>
+                <h3 class="text-2xl font-bold mb-3 text-gray-800">Order Placed!</h3>
+                <p class="text-gray-600 mb-6">Thank you for shopping with DayaStore. Your order confirmation is on its way.</p>
+                <button id="closeCheckoutModalBtn" class="w-full py-3 bg-green-600 text-white font-semibold rounded-lg hover:bg-green-700 transition">
+                    Continue Shopping
+                </button>
+            </div>
+        </div>
+
+        <div id="shippingModal" class="fixed inset-0 z-[70] flex items-center justify-center hidden bg-gray-900 bg-opacity-70">
+            <div class="bg-white p-8 rounded-xl shadow-2xl w-full max-w-lg max-h-[90vh] overflow-y-auto transform transition-all duration-300 scale-95">
+                <div class="flex items-center justify-between mb-6">
+                    <h2 class="text-2xl font-bold text-gray-900">Shipping Details</h2>
+                    <button id="closeShippingModalBtn" class="text-gray-400 hover:text-gray-600">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
+                    </button>
+                </div>
+
+                <form id="shippingForm" class="space-y-4">
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-2">First Name *</label>
+                            <input type="text" id="firstName" required class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition">
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-2">Last Name *</label>
+                            <input type="text" id="lastName" required class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition">
+                        </div>
+                    </div>
+
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-2">Email Address *</label>
+                        <input type="email" id="email" required class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition">
+                    </div>
+
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-2">Phone Number *</label>
+                        <input type="tel" id="phone" required class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition">
+                    </div>
+
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-2">Address Line 1 *</label>
+                        <input type="text" id="address1" required placeholder="Street address, P.O. box" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition">
+                    </div>
+
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-2">Address Line 2</label>
+                        <input type="text" id="address2" placeholder="Apartment, suite, unit, building, floor, etc." class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition">
+                    </div>
+
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-2">City *</label>
+                            <input type="text" id="city" required class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition">
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-2">State/Province *</label>
+                            <input type="text" id="state" required class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition">
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-2">ZIP/Postal Code *</label>
+                            <input type="text" id="zipCode" required class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition">
+                        </div>
+                    </div>
+
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-2">Country *</label>
+                        <select id="country" required class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition">
+                            <option value="">Select Country</option>
+                            <option value="Pakistan">Pakistan</option>
+                            <option value="India">India</option>
+                            <option value="Bangladesh">Bangladesh</option>
+                            <option value="Sri Lanka">Sri Lanka</option>
+                            <option value="Nepal">Nepal</option>
+                            <option value="Other">Other</option>
+                        </select>
+                    </div>
+
+                    <div class="bg-blue-50 p-4 rounded-lg">
+                        <p class="text-sm text-blue-800">
+                            <strong>Delivery Information:</strong> Standard delivery takes 3-5 business days. Express delivery available for select locations.
+                        </p>
+                    </div>
+
+                    <div class="flex space-x-4 pt-4">
+                        <button type="button" id="backToCartBtn" class="flex-1 py-3 bg-gray-200 text-gray-700 font-semibold rounded-lg hover:bg-gray-300 transition">
+                            Back to Cart
+                        </button>
+                        <button type="submit" class="flex-1 py-3 bg-indigo-600 text-white font-semibold rounded-lg hover:bg-indigo-700 transition">
+                            Continue to Payment
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <!-- Wishlist Modal -->
+        <div id="wishlistModal" class="fixed inset-0 z-50 flex items-center justify-center hidden">
+            <div id="wishlistOverlay" class="absolute inset-0 bg-gray-900 bg-opacity-50" onclick="toggleWishlistModal(false)"></div>
+            <div class="bg-white rounded-xl shadow-2xl w-full max-w-2xl max-h-[80vh] overflow-hidden relative z-10">
+                <div class="p-6 border-b">
+                    <div class="flex justify-between items-center">
+                        <h2 class="text-2xl font-bold text-gray-900">Your Wishlist</h2>
+                        <button onclick="toggleWishlistModal(false)" class="text-gray-500 hover:text-gray-900 p-2 rounded-full hover:bg-gray-100 transition">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-x"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
+                        </button>
+                    </div>
+                </div>
+                <div id="wishlistItems" class="p-6 overflow-y-auto max-h-96">
+                    <p id="emptyWishlistMessage" class="text-center text-gray-500 mt-10">Your wishlist is empty.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Product Details Modal -->
+        <div id="productDetailsModal" class="fixed inset-0 z-50 flex items-center justify-center hidden">
+            <div id="productDetailsOverlay" class="absolute inset-0 bg-gray-900 bg-opacity-50" onclick="toggleProductDetailsModal(false)"></div>
+            <div class="bg-white rounded-xl shadow-2xl w-full max-w-4xl max-h-[90vh] overflow-hidden relative z-10">
+                <div class="p-6 border-b">
+                    <div class="flex justify-between items-center">
+                        <h2 class="text-2xl font-bold text-gray-900">Product Details</h2>
+                        <button onclick="toggleProductDetailsModal(false)" class="text-gray-500 hover:text-gray-900 p-2 rounded-full hover:bg-gray-100 transition">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-x"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
+                        </button>
+                    </div>
+                </div>
+                <div id="productDetailsContent" class="p-6 overflow-y-auto max-h-96">
+                    <!-- Product details will be inserted here -->
+                </div>
+            </div>
+        </div>
+
+        <footer class="bg-gray-800 text-white py-8">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+                    <div>
+                        <h3 class="text-lg font-semibold mb-4">DayaStore</h3>
+                        <p class="text-gray-300">Your one-stop shop for all your tech needs.</p>
+                    </div>
+                    <div>
+                        <h4 class="text-md font-semibold mb-4">Quick Links</h4>
+                        <ul class="space-y-2">
+                            <li><a href="#" class="text-gray-300 hover:text-white transition">Home</a></li>
+                            <li><a href="#" class="text-gray-300 hover:text-white transition">Products</a></li>
+                            <li><a href="#" class="text-gray-300 hover:text-white transition">About</a></li>
+                            <li><a href="#" class="text-gray-300 hover:text-white transition">Contact</a></li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h4 class="text-md font-semibold mb-4">Categories</h4>
+                        <ul class="space-y-2">
+                            <li><a href="#" class="text-gray-300 hover:text-white transition">Electronics</a></li>
+                            <li><a href="#" class="text-gray-300 hover:text-white transition">Wearables</a></li>
+                            <li><a href="#" class="text-gray-300 hover:text-white transition">Audio</a></li>
+                            <li><a href="#" class="text-gray-300 hover:text-white transition">Gaming</a></li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h4 class="text-md font-semibold mb-4">Follow Us</h4>
+                        <div class="flex space-x-4">
+                            <a href="#" class="text-gray-300 hover:text-white transition">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-facebook"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
+                            </a>
+                            <a href="#" class="text-gray-300 hover:text-white transition">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-twitter"><path d="M23 3a10.9 10.9 0 0 1-3.14 1.53 4.48 4.48 0 0 0-7.86 3v1A10.66 10.66 0 0 1 3 4s-4 9 5 13a11.64 11.64 0 0 1-7 2c9 5 20 0 20-11.5a4.5 4.5 0 0 0-.08-.83A7.72 7.72 0 0 0 23 3z"/></svg>
+                            </a>
+                            <a href="#" class="text-gray-300 hover:text-white transition">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-instagram"><rect width="20" height="20" x="2" y="2" rx="5" ry="5"/><path d="m16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" x2="17.51" y1="6.5" y2="6.5"/></svg>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="border-t border-gray-700 mt-8 pt-8 text-center">
+                    <p class="text-gray-300">&copy; 2023 DayaStore. All rights reserved.</p>
+                </div>
+            </div>
+        </footer>
+    </div>
+    <script src="script.js"></script>
+    <script src="payment.js"></script>
+</body>
+</html>
